@@ -13,57 +13,254 @@
   <meta property="og:type" content="website" />
 
   <style>
-    :root { --max: 1040px; --radius: 18px; }
-    body { font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif; margin:0; color:#111; line-height:1.6; background:#fff; }
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 18px; }
-    header { padding: 28px 0 18px; }
-    .topbar { display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .brand { display:flex; align-items:center; gap:12px; min-width: 240px; }
-    .brand img { height:72px; width:auto; display:block; }
-    .nav { display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end; }
-    .nav a { text-decoration:none; color:#111; font-weight:700; font-size:14px; padding:10px 12px; border-radius: 999px; border:1px solid #eee; background:#fafafa; }
-    .hero { margin: 16px 0 0; border-radius: var(--radius); overflow:hidden; border:1px solid #eee; }
-    .hero img { width:100%; height:auto; display:block; }
-    .heroCopy { padding: 18px 0 0; }
-    h1 { margin:0 0 8px; font-size: 38px; line-height:1.12; letter-spacing:-0.02em; }
-    .sub { margin:0 0 14px; color:#333; }
-    .cta { display:flex; gap:12px; flex-wrap:wrap; margin: 12px 0 0; }
-    .btn { display:inline-block; padding: 12px 18px; border-radius: 14px; text-decoration:none; font-weight:800; }
-    .btn.primary { background:#111; color:#fff; }
-    .btn.secondary { border:1px solid #bbb; color:#111; background:#fff; }
-    .pills { display:flex; flex-wrap:wrap; gap:8px; margin-top: 12px; }
-    .pill { font-size:13px; border:1px solid #eee; background:#fafafa; padding:6px 10px; border-radius:999px; }
+  :root{
+    --max: 1080px;
+    --radius: 18px;
+    --text: #0b1220;
+    --muted: #4b5563;
+    --bg: #f7f8fb;
+    --card: #ffffff;
+    --border: rgba(15, 23, 42, .10);
+    --shadow: 0 10px 30px rgba(2, 6, 23, .08);
+    --shadow2: 0 6px 16px rgba(2, 6, 23, .10);
+    --accent: #2f6fed;          /* clean blue */
+    --accent2: #16a34a;         /* subtle green */
+    --accentSoft: rgba(47, 111, 237, .12);
+  }
 
-    section { padding: 28px 0; border-top: 1px solid #eee; }
-    h2 { margin:0 0 10px; font-size:22px; }
-    .grid { display:grid; grid-template-columns: 1fr; gap: 14px; }
-    .card { border:1px solid #eee; border-radius: var(--radius); padding: 16px; background:#fff; }
-    .small { font-size:14px; color:#444; }
-    ul { margin: 8px 0 0 18px; }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    margin:0; color:var(--text); line-height:1.65;
+    background:
+      radial-gradient(1200px 700px at 10% -10%, rgba(47,111,237,.18), transparent 55%),
+      radial-gradient(900px 600px at 90% 0%, rgba(22,163,74,.14), transparent 55%),
+      var(--bg);
+  }
 
-    /* Booking pattern */
-    .bookGrid { display:grid; grid-template-columns: 1fr; gap: 14px; margin-top: 12px; }
-    .bookCard h3 { margin:0 0 6px; font-size:18px; }
-    .bookCard p { margin:0 0 10px; color:#333; }
-    .muted { color:#666; }
+  a{ color: inherit; }
+  .wrap{ max-width: var(--max); margin:0 auto; padding: 0 18px; }
 
-    /* Mini gallery */
-    .gallery { display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
-    .gallery img { width:100%; height:auto; display:block; border-radius: 14px; border:1px solid #eee; }
+  /* Top bar / brand */
+  header{ padding: 22px 0 18px; }
+  .topbar{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .brand{ display:flex; align-items:center; gap:12px; min-width: 240px; }
+  .brand img{ height:78px; width:auto; display:block; filter: drop-shadow(0 6px 10px rgba(2,6,23,.12)); }
 
-    footer { padding: 28px 0 44px; border-top: 1px solid #eee; color:#444; font-size:14px; }
+  .nav{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+  .nav a{
+    text-decoration:none; font-weight:800; font-size:13px;
+    padding: 10px 12px; border-radius: 999px;
+    border:1px solid var(--border);
+    background: rgba(255,255,255,.75);
+    backdrop-filter: blur(8px);
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .nav a:hover{ transform: translateY(-1px); box-shadow: var(--shadow2); background:#fff; }
+
+  /* Hero */
+  .hero{
+    margin: 14px 0 0;
+    border-radius: calc(var(--radius) + 4px);
+    overflow:hidden;
+    border:1px solid var(--border);
+    box-shadow: var(--shadow);
+    background:#fff;
+  }
+  .hero img{ width:100%; height:auto; display:block; }
+
+  .heroCopy{ padding: 18px 0 0; }
+  h1{
+    margin:0 0 10px;
+    font-size: 44px; line-height:1.1; letter-spacing:-0.02em;
+  }
+  .sub{ margin:0 0 12px; color:var(--muted); font-size: 16px; }
+
+  .cta{ display:flex; gap:12px; flex-wrap:wrap; margin: 12px 0 0; }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding: 12px 18px; border-radius: 14px;
+    text-decoration:none; font-weight:900;
+    border: 1px solid transparent;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+    box-shadow: 0 6px 16px rgba(2, 6, 23, .10);
+  }
+  .btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow); }
+  .btn.primary{
+    color:#fff;
+    background: linear-gradient(135deg, var(--accent), #6d28d9);
+  }
+  .btn.secondary{
+    color: var(--text);
+    background: rgba(255,255,255,.9);
+    border-color: var(--border);
+  }
+
+  .pills{ display:flex; flex-wrap:wrap; gap:8px; margin-top: 12px; }
+  .pill{
+    font-size: 13px; font-weight: 800;
+    border:1px solid var(--border);
+    background: rgba(255,255,255,.75);
+    padding: 6px 10px; border-radius: 999px;
+  }
+
+  /* Sections / cards */
+  section{ padding: 28px 0; border-top: 1px solid rgba(15,23,42,.08); }
+  h2{ margin:0 0 10px; font-size: 22px; letter-spacing: -0.01em; }
+  .grid{ display:grid; grid-template-columns: 1fr; gap: 14px; }
+
+  .card{
+    border:1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    background: rgba(255,255,255,.88);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 26px rgba(2,6,23,.06);
+  }
+
+  .small{ font-size: 14px; color: var(--muted); }
+  ul{ margin: 8px 0 0 18px; }
+  li{ margin: 4px 0; }
+
+  /* Booking tiles (if present) */
+  .bookGrid{ display:grid; grid-template-columns: 1fr; gap: 14px; margin-top: 12px; }
+
+  /* Gallery */
+  .gallery{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  .gallery img{
+    width:100%; height:auto; display:block;
+    border-radius: 14px;
+    border:1px solid var(--border);
+    box-shadow: 0 10px 26px rgba(2,6,23,.08);
+  }
+
+  footer{
+    padding: 28px 0 44px;
+    border-top: 1px solid rgba(15,23,42,.08);
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  /* Mobile sticky CTA */
+  .stickyCta{
+    position: fixed; left: 12px; right: 12px; bottom: 12px;
+    display:flex; gap:10px; align-items:center; justify-content:center;
+    padding: 10px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.85);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow);
+    z-index: 50;
+  }
+  .stickyCta .btn{ width:100%; box-shadow:none; }
+  .stickyCta .btn.primary{ background: linear-gradient(135deg, var(--accent), #6d28d9); }
+
+  @media (min-width: 860px){
+    .grid{ grid-template-columns: 1fr 1fr; }
+    .bookGrid{ grid-template-columns: 1fr 1fr 1fr; }
+    .gallery{ grid-template-columns: 1fr 1fr 1fr; }
+    h1{ font-size: 52px; }
+    .stickyCta{ display:none; }
+  }
+
+
+/* Sticky top bar */
+    .stickyHeader{
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 0;
+      background: rgba(255,255,255,.82);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(2, 6, 23, .08);
+    }
+    .stickyHeader .topbar{ padding: 0; }
+    .topCta{ display:none; }
+    .nav{ flex-wrap: wrap; }
+    .nav a{ padding: 9px 10px; }
 
     @media (min-width: 860px){
-      .grid { grid-template-columns: 1fr 1fr; }
-      .bookGrid { grid-template-columns: 1fr 1fr 1fr; }
-      .gallery { grid-template-columns: 1fr 1fr 1fr; }
-      h1 { font-size: 44px; }
+      .nav{ flex-wrap: nowrap; }
+      .topCta{ display:inline-flex; }
     }
-  </style>
+    .topCta .btn{
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      box-shadow: none;
+    }
+
+
+/* Sticky frame */
+  .stickyBar{
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    padding: 12px 0;
+    background: rgba(255,255,255,.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(2, 6, 23, .10);
+  }
+
+  /* Make nav look like clean text links (not oval pills) */
+  .nav{
+    display:flex !important;
+    gap: 16px !important;
+    flex-wrap: wrap !important;
+    justify-content:flex-end !important;
+    align-items:center !important;
+  }
+  .nav a{
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-weight: 800 !important;
+    font-size: 14px !important;
+    opacity: .92;
+    text-decoration: none !important;
+  }
+  .nav a:hover{
+    opacity: 1;
+    text-decoration: underline !important;
+    text-underline-offset: 6px;
+  }
+
+  /* Keep all menu items on one line on desktop so Photo tour doesn't wrap */
+  @media (min-width: 860px){
+    .nav{ flex-wrap: nowrap !important; }
+  }
+
+
+/* Airbnb primary CTA */
+.btn.airbnb{
+  background: #FF385C; /* Airbnb coral */
+  color: #ffffff;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 14px;
+}
+.btn.airbnb:hover{
+  background: #e03150;
+}
+
+
+
+/* Anchor offset for sticky header */
+section[id]{
+  scroll-margin-top: 110px;
+}
+
+</style>
 </head>
 <body>
-
-<header>
+<div class="stickyBar" role="navigation" aria-label="Site menu">
   <div class="wrap">
     <div class="topbar">
       <div class="brand">
@@ -74,8 +271,29 @@
         <a href="#details">Details</a>
         <a href="#winter">Winter</a>
         <a href="#photos">Photos</a>
+      
+        <a href="#who">Who it’s for</a>
+        <a href="#why">Why guests love it</a>
+        <a href="#winter">Winter guide</a>
+        <a href="#tour">Photo tour</a>
+
       </nav>
+      <div class="topCta">
+        <a class="btn airbnb" href="https://www.airbnb.com/rooms/1440903925937662967" target="_blank" rel="noopener">Book on Airbnb</a>
+      </div>
+
     </div>
+  </div>
+</div>
+
+
+<header>
+  <div class="wrap">
+    <div class="stickyHeaderOld">
+  <div class="wrap">
+    
+  </div>
+</div>
 
     <div class="hero">
       <img src="images/hero-winter-bull-run-trailhouse-long-pond-pa.jpg" alt="Bull Run Trailhouse winter retreat in Long Pond, PA">
@@ -86,7 +304,7 @@
       <p class="sub">Near Camelback & Kalahari · Sleeps 12 · Game room · Fire pit · High‑speed Wi‑Fi</p>
 
       <div class="cta">
-        <a class="btn primary" href="https://www.airbnb.com/rooms/1440903925937662967" target="_blank" rel="noopener">Check availability on Airbnb</a>
+        <a class="btn airbnb" href="https://www.airbnb.com/rooms/1440903925937662967" target="_blank" rel="noopener">Check availability on Airbnb</a>
         <a class="btn secondary" href="#book">Book options</a>
       </div>
 
@@ -155,10 +373,144 @@
   
 </section>
 
+
+<section id="who">
+  <h2>Who it’s perfect for</h2>
+  <p class="small">A quick guide to help you decide if Bull Run Trailhouse is the right fit for your trip.</p>
+  <div class="grid" style="margin-top:12px;">
+    <div class="card">
+      <h2>Ski weekends</h2>
+      <ul>
+        <li>Close to Poconos winter activities and popular ski areas</li>
+        <li>Warm, comfortable layout for post-ski evenings</li>
+        <li>Indoor entertainment if weather changes plans</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Families</h2>
+      <ul>
+        <li>Sleeps up to 12 across 4 bedrooms</li>
+        <li>Game room keeps kids (and adults) entertained indoors</li>
+        <li>Multiple living spaces so everyone can spread out</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Groups & friends</h2>
+      <ul>
+        <li>Big shared spaces for meals and hangouts</li>
+        <li>Fire pit vibes for evenings together</li>
+        <li>Great “basecamp” for a weekend itinerary</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>NYC weekend getaways</h2>
+      <ul>
+        <li>Feels like a real escape without overcomplicating the trip</li>
+        <li>High-speed Wi‑Fi for a quick work check-in if needed</li>
+        <li>Easy arrival, easy reset</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <h2>Why guests love it</h2>
+  <div class="grid" style="margin-top:12px;">
+    <div class="card">
+      <h2>Comfort that feels effortless</h2>
+      <ul>
+        <li>Thoughtful layout for groups and families</li>
+        <li>Cozy spaces for movie nights and downtime</li>
+        <li>Bedrooms and bathrooms designed for real stays</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Indoor fun (especially in winter)</h2>
+      <ul>
+        <li>Game room for snowy-day entertainment</li>
+        <li>Easy “stay in” nights after skiing</li>
+        <li>Great for kids, teens, and adults</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Outdoor moments</h2>
+      <ul>
+        <li>Fire pit for evening hangouts and s’mores</li>
+        <li>Peaceful surroundings with fresh mountain air</li>
+        <li>Perfect winter scenery</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Location without the chaos</h2>
+      <ul>
+        <li>Convenient to Poconos attractions and winter activities</li>
+        <li>Still feels quiet and private back at the house</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="winter">
+  <h2>Winter & skiing guide</h2>
+  <div class="grid" style="margin-top:12px;">
+    <div class="card">
+      <h2>Winter basecamp essentials</h2>
+      <ul>
+        <li>Cozy indoor setup for après-ski nights</li>
+        <li>Indoor entertainment so the trip stays fun regardless of weather</li>
+        <li>Space for boots, coats, and winter gear</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Driving & arrival notes</h2>
+      <ul>
+        <li>AWD/4WD recommended during snowy conditions</li>
+        <li>Drive slower than GPS estimates when roads are icy</li>
+        <li>Pack a small winter car kit (brush, scraper, gloves)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>How to plan a winter weekend</h2>
+      <ul>
+        <li>Day: skiing / winter activities</li>
+        <li>Evening: game room + movie night</li>
+        <li>Night: fire pit vibes (weather-dependent)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>What to pack</h2>
+      <ul>
+        <li>Extra socks and base layers</li>
+        <li>Warm slippers for indoors</li>
+        <li>Flashlights/headlamps for snowy evenings</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="tour">
+  <h2>Photo tour</h2>
+  <p class="small">A curated highlight reel of interiors + amenities.</p>
+
+  
+  <div class="gallery">
+    <img src="images/winter-living-room-bull-run-trailhouse.jpg" alt="Living room in winter at Bull Run Trailhouse">
+    <img src="images/living-room-bull-run-trailhouse.jpg" alt="Living room at Bull Run Trailhouse">
+    <img src="images/primary-bedroom-bull-run-trailhouse.jpg" alt="Primary bedroom at Bull Run Trailhouse">
+  </div>
+
+  
+  <div class="gallery">
+    <img src="images/game-room-bull-run-trailhouse.jpg" alt="Game room at Bull Run Trailhouse">
+    <img src="images/fire-pit-bull-run-trailhouse.jpg" alt="Fire pit at Bull Run Trailhouse">
+    <img src="images/winter-exterior-bull-run-trailhouse.jpg" alt="Bull Run Trailhouse exterior in winter">
+  </div>
+</section>
+
 <section>
   <h2>Ready to book?</h2>
   <div class="cta">
-    <a class="btn primary" href="https://www.airbnb.com/rooms/1440903925937662967" target="_blank" rel="noopener">Book on Airbnb</a>
+    <a class="btn airbnb" href="https://www.airbnb.com/rooms/1440903925937662967" target="_blank" rel="noopener">Book on Airbnb</a>
   </div>
 </section>
 
